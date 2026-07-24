@@ -8,7 +8,7 @@ VF.createVideoSlide = function (reel, index) {
   el.dataset.index = index;
 
   el.innerHTML = `
-    <video src="${reel.src}" loop playsinline preload="metadata"></video>
+    <video src="${reel.src}" loop playsinline muted preload="metadata"></video>
     <div class="buffering-spinner"></div>
     <div class="fallback" style="display:none">${reel.emoji}</div>
     <div class="scrim"></div>
@@ -42,7 +42,7 @@ VF.createVideoSlide = function (reel, index) {
   const playback = VF.createPlaybackBar();
   playback.bind(video);
   el.appendChild(playback.el);
-  
+
   video.addEventListener('error', () => {
     video.style.display = 'none';
     fallback.style.display = 'flex';
@@ -50,6 +50,14 @@ VF.createVideoSlide = function (reel, index) {
 
   const sidebar = VF.createSidebar(reel);
   el.appendChild(sidebar.el);
+
+  const comments = VF.createComments(reel.commentsList);
+  el.appendChild(comments.el);
+
+  sidebar.commentsBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    comments.open();
+  });
 
   function flashIcon(node) {
     node.classList.remove('show');
@@ -89,13 +97,30 @@ VF.createVideoSlide = function (reel, index) {
   return {
     el,
     video,
-    play() {
-      video.play().catch(() => {});
-      playIndicator.classList.remove('is-paused');
+    async play() {
+      if (!video.paused) return;
+
+      try {
+        if (video.readyState < 3) {
+          await new Promise(resolve => {
+            video.addEventListener("canplay", resolve, {
+              once: true
+            });
+          });
+        }
+
+        await video.play();
+      } catch (e) {
+        console.log(e);
+      }
+
+      playIndicator.classList.remove("is-paused");
     },
     pause() {
-      video.pause();
-      video.currentTime = 0;
+      if (!video.paused) {
+        video.pause();
+        comments.close();
+      }
     },
     setVolume(v) {
       video.volume = v;

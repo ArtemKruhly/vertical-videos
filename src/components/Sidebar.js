@@ -15,7 +15,7 @@ VF.createSidebar = function (reel) {
     <span class="count">${toK(reel.likes)}</span>
   </button>
 
-  <button type="button" aria-label="Comments">
+  <button type="button" class="comments-btn" aria-label="Comments">
     <span class="icon">💬</span>
     <span class="count">${toK(reel.comments)}</span>
   </button>
@@ -27,6 +27,7 @@ VF.createSidebar = function (reel) {
 `;
 
   const likeBtn = el.querySelector('.like-btn');
+  const commentsBtn = el.querySelector('.comments-btn');
   const icon = likeBtn.querySelector('.icon');
   const count = likeBtn.querySelector('.count');
   let liked = false;
@@ -49,6 +50,7 @@ VF.createSidebar = function (reel) {
 
   return {
     el,
+    commentsBtn,
     likeOnly() {
       if (!liked) {
         toggleLike();

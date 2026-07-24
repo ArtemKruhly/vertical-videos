@@ -7,21 +7,23 @@ VF.createFeed = function (reels) {
   const slides = reels.map((reel, i) => VF.createVideoSlide(reel, i));
   slides.forEach((s) => el.appendChild(s.el));
 
-  let current = 0;
+  let current = -1;
   let volume = 0;
   let speed = 1;
 
   function setActive(index) {
+    if (index === current) return;
+
+    slides[current]?.pause();
+
     current = index;
-    slides.forEach((s, i) => {
-      if (i === index) {
-        s.setVolume(volume);
-        s.setSpeed(speed);
-        s.play();
-      } else {
-        s.pause();
-      }
-    });
+
+    const slide = slides[current];
+
+    slide.video.currentTime = 0;
+    slide.setVolume(volume);
+    slide.setSpeed(speed);
+    slide.play();
   }
 
   function setSpeed(v) {

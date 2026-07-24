@@ -12,7 +12,9 @@
     height: 3px;
     border-radius: 999px;
     background: rgba(255,255,255,.25);
-    transition: height .1s ease;
+    transition: height .15s ease;
+    touch-action: none;
+    cursor: pointer;
 }
 
 .playback-fill {
@@ -20,7 +22,7 @@
     height: 100%;
     width: 0;
     border-radius: inherit;
-    background: white;
+    background: var(--ink);
 }
 
 .playback-thumb {
@@ -30,9 +32,23 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: white;
+    background: var(--ink);
+
     transform: translateY(-50%) scale(0);
-    transition: transform .1s;
+    opacity: 0;
+
+    transition:
+            transform .18s ease,
+            opacity .18s ease;
+
+    touch-action: none;
+    cursor: grab;
+}
+
+.playback-thumb::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
 }
 
 .time {
@@ -43,9 +59,15 @@
     border-radius: 8px;
     background: rgba(0,0,0,.7);
     font-size: 11px;
+
     opacity: 0;
     transform: translateY(4px);
-    transition: .1s;
+
+    transition:
+            opacity .15s,
+            transform .15s;
+
+    pointer-events: none;
 }
 
 .playback:hover .playback-track {
@@ -54,6 +76,7 @@
 
 .playback:hover .playback-thumb {
     transform: translateY(-50%) scale(1);
+    opacity: 1;
 }
 
 .playback:hover .time {
@@ -61,36 +84,17 @@
     transform: translateY(0);
 }
 
-.playback.dragging .playback-thumb{
-    transform:translateY(-50%) scale(1.4);
+.playback.dragging .playback-track {
+    height: 8px;
 }
 
-.playback.dragging .playback-track{
-    height:8px;
-}
-
-.playback-fill {
-    position: relative;
-    height: 100%;
-    width: 0;
-    background: var(--ink);
-}
-
-.playback-fill::after {
-    content: "";
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--ink);
-    transform: translateY(-50%) scale(0);
-    opacity: 0;
-    transition: transform .18s ease, opacity .18s ease;
-}
-
-.playback:hover .playback-fill::after {
-    transform: translateY(-50%) scale(1);
+.playback.dragging .playback-thumb {
+    transform: translateY(-50%) scale(1.4);
     opacity: 1;
+    cursor: grabbing;
+}
+
+.playback.dragging .time {
+    opacity: 1;
+    transform: translateY(0);
 }

@@ -1,6 +1,7 @@
 Приложение лежит на https://artemkruhly.github.io/vertical-videos/.
 
 Использовал технологии:
+
 -Vanilla JavaScript (ES6+)
 
 -HTML5 Video API

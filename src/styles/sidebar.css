@@ -1,0 +1,71 @@
+.side {
+  position: absolute;
+  right: 10px;
+  bottom: 100px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
+
+.avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  border: 2px solid var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.username {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--ink);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  max-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.side button {
+  background: none;
+  border: none;
+  color: var(--ink);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.side .icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  transition: transform 0.15s ease;
+}
+.side button:active .icon { transform: scale(0.85); }
+.side button.liked .icon { color: var(--accent); }

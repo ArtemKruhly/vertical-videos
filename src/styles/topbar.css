@@ -1,0 +1,42 @@
+#topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  padding: 16px 16px 40px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent);
+}
+
+#topbar .tabs {
+  display: flex;
+  gap: 22px;
+  flex: 1;
+  justify-content: flex-start;
+  margin-left: 50px;
+}
+
+#topbar .tabs span {
+  font-weight: 700;
+  font-size: 156px;
+  color: var(--ink-faint);
+  letter-spacing: 0.2px;
+}
+#topbar .tabs span.active { color: var(--ink); }
+
+#topbar .tabs span {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink-faint);
+  letter-spacing: 0.2px;
+}
+#topbar .tabs span.active { color: var(--ink); }
+
+@media all and (max-width: 500px) {
+  #topbar .tabs {
+    margin-left: 0px;
+  }
+}

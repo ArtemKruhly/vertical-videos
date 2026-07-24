@@ -1,0 +1,79 @@
+#volume-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.vol-icon {
+  background: none;
+  border: none;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vol-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--rail);
+  outline: none;
+  cursor: pointer;
+  width: 64px;
+  opacity: 0;
+  pointer-events: none;
+  transition: width .25s ease, opacity .2s ease;
+}
+
+.volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume:hover .vol-range {
+  width: 64px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.vol-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.vol-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+}
+
+.vol-range::-moz-range-track {
+  height: 3px;
+  border-radius: 3px;
+  background: var(--rail);
+}
+
+@media all and (max-width: 500px) {
+  .vol-range {
+    width: 44px;
+  }
+
+  .volume:hover .vol-range {
+    width: 44px;
+  }
+}

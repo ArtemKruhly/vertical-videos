@@ -1,0 +1,23 @@
+#rail {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#rail .dash {
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--rail);
+  transition: background 0.25s ease, height 0.25s ease;
+}
+
+#rail .dash.active {
+  background: var(--rail-active);
+  height: 24px;
+}

@@ -1,0 +1,24 @@
+.buffering-spinner {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+.buffering-spinner.show { display: flex; }
+
+.buffering-spinner::after {
+    content: "";
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.25);
+    border-top-color: var(--ink);
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
